@@ -12,6 +12,7 @@ class SampleApplicationTests {
 	@Autowired
 	SampleController sampleController;
 
+
 	@Test
 	void contextLoads() {
 		Assertions.assertNotNull(sampleController);

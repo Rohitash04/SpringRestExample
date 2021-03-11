@@ -9,6 +9,7 @@ import com.practice.sample.repository.AuthorRepository;
 import com.practice.sample.repository.BookRepository;
 import com.practice.sample.repository.PublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,9 @@ public class SampleController {
 
     @Autowired
     BookRepository bookRepository;
+
+    @Value("${spring.profiles.active}")
+    private String activeProfile; //To get the profile that's active.
 
     @Autowired
     AuthorRepository authorRepository;
