@@ -1,5 +1,5 @@
-##Sample Request- 
-PUT - localhost:8081/sample/book
+## Sample Request- 
+* PUT - localhost:8081/sample/book
 ````
 {
 	"id":"1",
