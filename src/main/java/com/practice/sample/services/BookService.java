@@ -42,6 +42,7 @@ public class BookService {
         AuthorEntity authorEntity = null;
         if (book.getAuthor() != null) {
             authorEntity = getAuthorEntity(book.getAuthor());
+
         }
         PublicationEntity publicationEntity = null;
         if(book.getPublication() != null){
@@ -132,6 +133,7 @@ public class BookService {
                     .name(publication.getName())
                     .address(getAddressEntity(publication.getAddress()))
                     .build();
+            publicationRepository.save(publicationEntity);
         }else{
             publicationEntity = PublicationEntity.builder()
                     .code(publication.getCode())
@@ -142,7 +144,7 @@ public class BookService {
 
     private AuthorEntity getAuthorEntity(Author author) {
         AuthorEntity authorEntity;
-        if (authorRepository.findById(author.getId()) == null) {
+        if (authorRepository.findById(author.getId()).isEmpty()) {
             AddressEntity addressEntity = null;
             if (author.getAddress() != null) {
                 addressEntity = getAddressEntity(author.getAddress());
@@ -152,6 +154,7 @@ public class BookService {
                     .name(author.getName())
                     .address(addressEntity)
                     .build();
+            authorRepository.save(authorEntity);
         } else {
             authorEntity = AuthorEntity.builder()
                     .id(author.getId())
@@ -162,7 +165,7 @@ public class BookService {
 
     private AddressEntity getAddressEntity(Address address) {
         AddressEntity addressEntity;
-        if (addressRepository.findById(address.getId()) == null) {
+        if (addressRepository.findById(address.getId()).isEmpty()) {
             addressEntity = AddressEntity.builder()
                     .id(address.getId())
                     .houseNumber(address.getHouseNumber())
@@ -170,6 +173,7 @@ public class BookService {
                     .city(address.getCity())
                     .zipCode(address.getZipCode())
                     .build();
+            addressRepository.save(addressEntity);
         }else{
             addressEntity = AddressEntity.builder()
                     .id(address.getId())
