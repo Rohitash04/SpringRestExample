@@ -13,6 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+/**
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+**/
 
 @RestController
 @RequestMapping("/sample")
@@ -29,11 +39,56 @@ public class SampleController {
         return ResponseEntity.ok().body("HI There!");
     }
 
+   
     @PostMapping(path = "/greetings/{for}", produces = "application/json", consumes = "application/json")
     public ResponseEntity<String> greetingsPost(@PathVariable("for") String name) {
         return ResponseEntity.ok().body("HI There " + name + "!");
     }
 
+    /**
+        @Operation(method = "POST", summary = "To Save new book",
+        parameters = { @Parameter
+          (in = ParameterIn.HEADER,
+            name = "HTTP_AUTH_TOKEN",
+            required = true,
+            schema = @Schema(type = "string"),
+            description = "JWT auth token")
+        }
+      )
+      @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(
+        examples = @ExampleObject(value="{
+            + "id":"1",
+            + "name":"Learning Java",
+            + "shortDescription":"Comprehensive Java Tutorial",
+            + "author":{
+            + 	"id":"101",
+            + 	"name":"Tom",
+            + 	"address":{
+            + 		"id":"1",
+            + 		"houseNumber":"9",
+            + 		"city":"London"
+            + 	}
+            + },
+            + "publication":{
+            + 	"code":"999",
+            + 	"name":"Pearl",
+            + 	"address":{
+            + 		"id":"2",
+            + 		"houseNumber":"45",
+            + 		"city":"Paris"
+            + 	}
+            + }
+        + }"),
+
+        schema = @Schema(implementation = Book.class),
+        mediaType = MediaType.APPLICATION_JSON_VALUE)
+      )
+      @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Book saved",
+          content = { @Content(mediaType = "application/json",
+            schema = @Schema(implementation = SampleController.class)) }),
+      })
+    **/
     @PostMapping(path = "/book", produces = "application/json", consumes = "application/json")
     public ResponseEntity<BookEntity> saveBook(@RequestBody Book book) {
         BookEntity savedBook = bookService.addBook(book);
