@@ -6,7 +6,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import org.apache.commons.lang3.StringUtils;
+
+import com.practice.sample.model.Book;
+import com.practice.sample.model.entity.BookEntity;
 import org.springframework.data.jpa.domain.Specification;
 
 // from https://docs.spring.io/spring-data/jpa/docs/1.5.0.RELEASE/reference/html/jpa.repositories.html section 2.4 
@@ -26,7 +28,7 @@ public class BookRepositorySpecification implements Specification<BookEntity> {
   
     predicates.add(builder.equal(root.get("id"), book.getId()));
 
-    if (StringUtils.isNotEmpty(book.getName())) {
+    if (book.getName() != null && !book.getName().isEmpty()) {
       predicates.add(
         builder.equal(root.get("name"), book.getName()));
     }

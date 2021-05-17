@@ -1,3 +1,5 @@
+package com.practice.sample;
+
 /**
 package com.practice.sample;
 
@@ -13,8 +15,9 @@ import io.swagger.v3.oas.models.info.Info;
  * All rights reserved.
  *
  */
+/**
 @Configuration
-public class SwaggerConfig implements WebMvcConfigurer {
+public class OpenApiConfig implements WebMvcConfigurer {
 
   @Bean
   public OpenAPI customOpenAPI(@Value("${application-description}") String appDesciption,
