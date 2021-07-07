@@ -39,7 +39,7 @@ public class SampleController {
         return ResponseEntity.ok().body("HI There!");
     }
 
-   
+   //OpenAPI reference https://github.com/springdoc/springdoc-openapi/tree/master/springdoc-openapi-webmvc-core/src/test/java/test/org/springdoc/api/app90
     @PostMapping(path = "/greetings/{for}", produces = "application/json", consumes = "application/json")
     public ResponseEntity<String> greetingsPost(@PathVariable("for") String name) {
         return ResponseEntity.ok().body("HI There " + name + "!");
