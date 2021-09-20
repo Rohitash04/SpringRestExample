@@ -14,4 +14,5 @@ public class Book {
     private String shortDescription;
     private Author author;
     private Publication publication;
+   // private Timestamp createTs;
 }
